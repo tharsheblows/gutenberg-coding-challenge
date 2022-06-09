@@ -1,6 +1,6 @@
 .xwp-country-card {
 	border: 1px solid #dcdcde;
-	box-shadow: 0px 1px 1px rgba(#000, 0.05);
+	box-shadow: 0 1px 1px rgba(#000, 0.05);
 
 	.xwp-country-card__media {
 		align-items: center;
@@ -10,20 +10,20 @@
 		justify-content: center;
 		overflow: hidden;
 		position: relative;
-		margin: 0px;
+		margin: 0;
 
-		&:before {
+		&::before {
 			align-items: center;
 			content: attr(data-emoji-flag);
 			display: flex;
-			filter: blur(3vh) saturate(3) contrast(1) opacity(0.4);
+			filter: blur(10vh) saturate(3) contrast(1) opacity(0.4);
 			font-size: calc(800px + 3vh);
 			height: 100%;
 			justify-content: center;
-			left: 0px;
+			left: 0;
 			pointer-events: none;
 			position: absolute;
-			top: 0px;
+			top: 0;
 			width: 100%;
 		}
 	}
@@ -32,12 +32,21 @@
 .xwp-country-card-flag {
 	font-size: calc(200px + 3vw);
 	line-height: 1;
+	z-index: 1;
 }
 
 .xwp-country-card__heading {
 	padding: 1.5rem;
 	margin: 0;
 	font-size: 2rem;
+}
+
+.xwp-country-card__country-code {
+	text-decoration: underline #000 dotted;
+}
+
+.xwp-country-card__searched-word {
+	font-weight: 700;
 }
 
 .xwp-country-card__related-posts {
@@ -47,23 +56,27 @@
 }
 
 .xwp-country-card__related-posts__heading {
-	margin: 0px;
+	margin: 0;
 	font-size: 1.5rem;
 }
 
-.xwp-country-card__related-posts-list {
+.xwp-country-card__related-posts__list {
 	padding-left: 1.5rem;
 }
 
-.related-post + .related-post {
-	margin-top: 1.5rem;
+.xwp-country-card__related-post {
+	margin-top: 1rem;
 }
 
-.related-post .title {
-	margin: 0px;
+.xwp-country-card__related-post__heading {
+	margin: 0;
 	font-size: 1.5rem;
 }
 
-.related-post .excerpt {
-	margin: 0px;
+.xwp-country-card__related-post__excerpt {
+	margin: 0;
+}
+
+.xwp-country-card__related-post-link {
+	text-decoration: underline;
 }
