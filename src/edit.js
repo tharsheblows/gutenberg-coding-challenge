@@ -73,35 +73,43 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 				exclude: postId,
 			} );
 
-			// This could use @wordpress/apiFetch also but not with async/await I think.
-			const response = await window.fetch( searchUrl );
+			try {
+				const response = await window.fetch( searchUrl );
 
-			if ( ! response.ok ) {
-				throw new Error( `HTTP error! Status: ${ response.status }` );
+				if ( ! response.ok ) {
+					throw new Error(
+						`HTTP error! Status: ${ response.status }`
+					);
+				}
+
+				const posts = await response.json();
+
+				setAttributes( {
+					relatedPosts:
+						posts?.map( ( relatedPost ) => ( {
+							...relatedPost,
+							title: relatedPost.title
+								? sanitizeAndStyle(
+										relatedPost.title.rendered,
+										countryCode,
+										'title'
+								  )
+								: relatedPost.link,
+							excerpt: relatedPost.excerpt
+								? sanitizeAndStyle(
+										relatedPost.excerpt.rendered,
+										countryCode,
+										'excerpt'
+								  )
+								: '',
+						} ) ) || [],
+				} );
+			} catch ( error ) {
+				// Error logging goes here.
+				setAttributes( {
+					relatedPosts: [],
+				} );
 			}
-
-			const posts = await response.json();
-
-			setAttributes( {
-				relatedPosts:
-					posts?.map( ( relatedPost ) => ( {
-						...relatedPost,
-						title: relatedPost.title
-							? sanitizeAndStyle(
-									relatedPost.title.rendered,
-									countryCode,
-									'title'
-							  )
-							: relatedPost.link,
-						excerpt: relatedPost.excerpt
-							? sanitizeAndStyle(
-									relatedPost.excerpt.rendered,
-									countryCode,
-									'excerpt'
-							  )
-							: '',
-					} ) ) || [],
-			} );
 		}
 
 		getRelatedPosts();
