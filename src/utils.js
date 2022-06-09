@@ -89,7 +89,7 @@ export const options = Object.keys( countries ).map( ( code ) => ( {
  * @return {Array} An array of the words which should be in bold.
  */
 const getWordsToBold = ( countryCode ) => {
-	return [ countries[ countryCode ], 'ipsum' ];
+	return [ countries[ countryCode ], 'ipsum', 'world' ];
 };
 
 /**
