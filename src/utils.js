@@ -44,10 +44,10 @@ export function sanitizeAndStyle( content, countryCode, context ) {
 		return sanitizeInContext( content, context );
 	}
 
-	const markedContent = wordsToBold.reduce( ( wordToBold ) => {
+	const markedContent = wordsToBold.reduce( ( newContent, wordToBold ) => {
 		const boldMarkup = `<span class="xwp-country-card__searched-word">${ wordToBold }</span>`;
-		return content.split( wordToBold ).join( boldMarkup );
-	} );
+		return newContent.split( wordToBold ).join( boldMarkup );
+	}, content );
 
 	return sanitizeInContext( markedContent, context );
 }
@@ -89,7 +89,7 @@ export const options = Object.keys( countries ).map( ( code ) => ( {
  * @return {Array} An array of the words which should be in bold.
  */
 const getWordsToBold = ( countryCode ) => {
-	return [ countries[ countryCode ], 'world' ];
+	return [ countries[ countryCode ], 'ipsum' ];
 };
 
 /**
